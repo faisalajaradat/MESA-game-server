@@ -43,7 +43,7 @@ services:
       MYSQL_DATABASE: "panel"
       MYSQL_USER: "pterodactyl"
     volumes:
-      - "/database:/var/lib/mysql"
+      - "./database:/var/lib/mysql"
   cache:
     image: redis:alpine
     restart: always
@@ -57,9 +57,9 @@ services:
       - database
       - cache
     volumes:
-      - "/app2:/app/"
-      - "/certs/:/etc/letsencrypt/"
-      - "/nginx/:/etc/nginx/http.d/"
+      - "./app:/app/"
+      - "./certs/:/etc/letsencrypt/"
+      - "./nginx/:/etc/nginx/http.d/"
     environment:
       <<: [*panel-environment, *mail-environment]
       DB_PASSWORD: *db-password
